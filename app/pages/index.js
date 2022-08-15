@@ -131,7 +131,7 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <Nav />
       <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <h3>Mint</h3>
