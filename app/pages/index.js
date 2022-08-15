@@ -2,7 +2,7 @@ import { Web3Storage, File } from "web3.storage";
 import abi from "./abi/Hepier.json";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
-import Nav from "./components/Nav";
+import Nav from "../components/Nav";
 
 export default function Home() {
   const getContract = async () => {
