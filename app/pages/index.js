@@ -3,6 +3,7 @@ import abi from "./abi/Hepier.json";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import Nav from "../components/Nav";
+import Balances from "../components/balances/Balances";
 
 export default function Home() {
   const getContract = async () => {
@@ -14,7 +15,7 @@ export default function Home() {
 
     const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-    return contract;
+    return { contract, provider };
   };
 
   const getAccessToken = () => {
@@ -76,7 +77,7 @@ export default function Home() {
   };
 
   const mintAndSetURI = async (amount, uri) => {
-    const contract = await getContract();
+    const { contract } = await getContract();
 
     const mintTokens = await contract.mint(amount);
     await mint.wait();
@@ -105,7 +106,7 @@ export default function Home() {
     // await mintAndSetURI(data)
 
     // mint the token
-    const hepierContract = await getContract();
+    const { hepierContract } = await getContract();
     const mintToken = await hepierContract.mint(data.amountToMint);
     await mintToken.wait();
 
@@ -133,6 +134,7 @@ export default function Home() {
   return (
     <div>
       <Nav />
+      <Balances />
       <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <h3>Mint</h3>
         <form onSubmit={submit} className="w-full max-w-sm pt-2 pb-4">
