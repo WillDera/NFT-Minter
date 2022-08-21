@@ -36,6 +36,18 @@ contract Hepier is ERC1155, Ownable, ERC1155Burnable {
         _mint(address(msg.sender), tokenId, amount, "");
     }
 
+    function mintAndSetUri(uint256 amount, string memory newuri)
+        public
+        onlyOperator
+    {
+        require(amount > 0, "Amount cant be less than 0");
+        mint(amount);
+
+        bytes memory tempUri = bytes(newuri);
+        require(tempUri.length != 0, "Uri cant be empty");
+        setURI(newuri);
+    }
+
     function mintBatch(uint256[] memory ids, uint256[] memory amounts)
         public
         onlyOperator
@@ -47,11 +59,30 @@ contract Hepier is ERC1155, Ownable, ERC1155Burnable {
         return tokenURI[_id];
     }
 
-    function transfer(address to, uint256 amount) public onlyOperator {
+    function transfer(
+        address to,
+        uint256 id,
+        uint256 amount
+    ) public onlyOperator {
         address from = address(msg.sender);
-        uint256 tokenId = _tokenIdCounter.current();
 
-        safeTransferFrom(from, to, tokenId, amount, "");
+        safeTransferFrom(from, to, id, amount, "");
+    }
+
+    function multiTransfer(
+        address[] calldata to,
+        uint256 id,
+        uint256 amount
+    ) public onlyOperator {
+        require(
+            balanceOf(address(msg.sender), id) >= to.length,
+            "Insufficient balance for transaction"
+        );
+        address from = address(msg.sender);
+
+        for (uint256 index = 0; index < to.length; index++) {
+            safeTransferFrom(from, address(to[index]), id, amount, "");
+        }
     }
 
     function setOperator(address _operatorAddress) public onlyOwner {

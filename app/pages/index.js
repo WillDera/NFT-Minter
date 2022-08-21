@@ -3,6 +3,8 @@ import abi from "./abi/Hepier.json";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import Nav from "../components/Nav";
+import Balances from "../components/balances/Balances";
+import Transfer from "../components/transfer/Transfer";
 
 export default function Home() {
   const getContract = async () => {
@@ -78,11 +80,8 @@ export default function Home() {
   const mintAndSetURI = async (amount, uri) => {
     const contract = await getContract();
 
-    const mintTokens = await contract.mint(amount);
-    await mint.wait();
-
-    const setUri = await contract.setUri(uri);
-    await setUri.wait();
+    const mintTokens = await contract.mintAndSetUri(amount, uri);
+    await mintTokens.wait();
 
     console.log("Head to opensea");
   };
@@ -101,20 +100,11 @@ export default function Home() {
     // const owner = await getContract();
     // console.log(owner);
 
-    // // mint token and set uri
-    // await mintAndSetURI(data)
-
-    // mint the token
-    const hepierContract = await getContract();
-    const mintToken = await hepierContract.mint(data.amountToMint);
-    await mintToken.wait();
-
     // store data on ipfs
     const uri = await storeData(data);
 
-    // set uri to token which was just minted
-    const seturi = await hepierContract.setURI(uri);
-    await seturi.wait();
+    // mint the token and set uri
+    await mintAndSetURI(data.amountToMint, uri);
 
     // console.log(data);
     // console.log(await owner.owner());
@@ -133,6 +123,7 @@ export default function Home() {
   return (
     <div>
       <Nav />
+      <Balances />
       <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <h3>Mint</h3>
         <form onSubmit={submit} className="w-full max-w-sm pt-2 pb-4">
@@ -252,6 +243,7 @@ export default function Home() {
           </div>
         </form>
       </div>
+      <Transfer contract={getContract()} />
     </div>
   );
 }
