@@ -1,8 +1,5 @@
-import Link from "next/link";
 import { ethers } from "ethers";
-import { useState, useEffect } from "react";
-import { useContext } from "react";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
 import AppContext from "./AppContext";
 
 const Nav = () => {
@@ -16,19 +13,20 @@ const Nav = () => {
         console.log("Install metamask");
         return;
       }
+
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
+
       if (accounts.length !== 0) {
         const account = accounts[0];
-        console.log(account);
         console.log("Logging in..");
+
         const provider = new ethers.providers.Web3Provider(ethereum);
+        value.setProvider(provider);
+
         const Id = await provider.getNetwork();
-        console.log(Id.chainId);
-        // const provider = new ethers.providers.getDefaultProvider(ethereum);
-        // const { chainId } = provider.
-        // console.log(chainId);
+
         if (Id.chainId !== 80001) {
           console.log("connect to mumbai testnet");
           alert("Connect to mumbai network");
@@ -44,15 +42,6 @@ const Nav = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const headers = (access_token) => {
-    const header = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + access_token,
-    };
-
-    value.setAccessToken(header);
   };
 
   // TODO: Comment this out later, and modify to implement disconnect feature.

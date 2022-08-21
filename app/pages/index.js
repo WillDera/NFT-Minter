@@ -5,18 +5,30 @@ import { ethers } from "ethers";
 import Nav from "../components/Nav";
 import Balances from "../components/balances/Balances";
 import Transfer from "../components/transfer/Transfer";
+import { useContext } from "react";
+import AppContext from "./../components/AppContext";
 
 export default function Home() {
+  const value = useContext(AppContext);
+  const { provider } = value.state;
+
   const getContract = async () => {
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    const signer = provider.getSigner();
+    if (provider) {
+      const signer = provider.getSigner();
 
-    const contractAddress = process.env.NEXT_PUBLIC_HEPIER_CONTRACT;
-    const contractAbi = abi.abi;
+      const contractAddress = process.env.NEXT_PUBLIC_HEPIER_CONTRACT;
+      const contractAbi = abi.abi;
 
-    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractAbi,
+        signer
+      );
 
-    return contract;
+      return contract;
+    } else {
+      console.log("Provider Undefined");
+    }
   };
 
   const getAccessToken = () => {
