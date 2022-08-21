@@ -53,6 +53,7 @@ const Transfer = ({ contract }) => {
               name="tokenId"
               type="text"
               placeholder="Token ID"
+              required
             />
           </div>
         </div>
@@ -73,6 +74,7 @@ const Transfer = ({ contract }) => {
               name="tokenReceiver"
               type="text"
               placeholder="Single address or Multiple addresses separated by a comma"
+              required
             />
           </div>
         </div>
@@ -92,6 +94,7 @@ const Transfer = ({ contract }) => {
               name="transferAmount"
               type="number"
               placeholder="How many to transfer to each address"
+              required
             />
           </div>
         </div>

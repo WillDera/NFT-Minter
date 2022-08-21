@@ -4,7 +4,7 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import Nav from "../components/Nav";
 import Balances from "../components/balances/Balances";
-import Transfer from "../components/Transfer";
+import Transfer from "../components/transfer/Transfer";
 
 export default function Home() {
   const getContract = async () => {
