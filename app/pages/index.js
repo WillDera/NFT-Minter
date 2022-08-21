@@ -8,7 +8,7 @@ import Transfer from "../components/transfer/Transfer";
 
 export default function Home() {
   const getContract = async () => {
-    const provider = new ethers.providers.Web3Provider(ethereum);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
     const contractAddress = process.env.NEXT_PUBLIC_HEPIER_CONTRACT;
