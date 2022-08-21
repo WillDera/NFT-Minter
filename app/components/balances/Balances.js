@@ -9,7 +9,9 @@ const Balances = () => {
   const { isConnected, currentAccount } = value.state;
 
   const getNFTs = async () => {
-    const nfts = await alchemy.nft.getNftsForOwner(currentAccount);
+    const nfts = await alchemy.nft.getNftsForOwner(currentAccount, {
+      contractAddresses: [process.env.NEXT_PUBLIC_HEPIER_CONTRACT],
+    });
 
     const _nftBalances = [];
 
@@ -46,18 +48,13 @@ const Balances = () => {
               balanceData[0].map((token) => {
                 return (
                   <tr>
-                    {token.contract.address ==
-                      "0xec2ebecd4dedfc223a19a367032e0e557544888d" && (
-                      <>
-                        <td>{token.tokenId}</td>
-                        <td>{token.title}</td>
-                        <td>{token.balance}</td>
-                        {token.rawMetadata.attributes.length > 0 ? (
-                          <td>{token.rawMetadata.attributes[0].value}</td>
-                        ) : (
-                          <td>no value</td>
-                        )}
-                      </>
+                    <td>{token.tokenId}</td>
+                    <td>{token.title}</td>
+                    <td>{token.balance}</td>
+                    {token.rawMetadata.attributes.length > 0 ? (
+                      <td>{token.rawMetadata.attributes[0].value}</td>
+                    ) : (
+                      <td>no value</td>
                     )}
                   </tr>
                 );
