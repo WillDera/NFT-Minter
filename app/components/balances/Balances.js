@@ -31,30 +31,42 @@ const Balances = () => {
   console.log(balanceData);
 
   return (
-    <div className="w-full md:w-1/3 px-3 pt-6 pb-6 mb-6 md:mb-0">
+    <div className="w-full md:w-1/2 px-3 pt-6 pb-6 mb-6 md:mb-0">
       <h3 className="pb-3">Balances</h3>
       {currentAccount ? (
-        <table className="table-auto w-full max-w-sm">
-          <thead>
+        <table className="w-full text-sm text-left">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th>Token ID</th>
-              <th>Token Name</th>
-              <th>Amount In Wallet</th>
-              <th>Token Value</th>
+              <th scope="col" className="py-3 px-6">
+                Token ID
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Token Name
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Amount In Wallet
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Token Value
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {balanceData[0] &&
               balanceData[0].map((token) => {
                 return (
-                  <tr>
-                    <td>{token.tokenId}</td>
-                    <td>{token.title}</td>
-                    <td>{token.balance}</td>
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td scope="py-4 px-6 text-gray-900 dark:text-white">
+                      {token.tokenId}
+                    </td>
+                    <td scope="py-4 px-6">{token.title}</td>
+                    <td scope="py-4 px-6">{token.balance}</td>
                     {token.rawMetadata.attributes.length > 0 ? (
-                      <td>{token.rawMetadata.attributes[0].value}</td>
+                      <td scope="py-4 px-6">
+                        {token.rawMetadata.attributes[0].value}
+                      </td>
                     ) : (
-                      <td>no value</td>
+                      <td scope="py-4 px-6">no value</td>
                     )}
                   </tr>
                 );

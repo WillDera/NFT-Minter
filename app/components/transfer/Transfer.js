@@ -35,7 +35,7 @@ const Transfer = ({ contract }) => {
       <h3>Transfer</h3>
       <form
         onSubmit={(e) => initiateTransfer(e, contract)}
-        className="w-full max-w-sm pt-2 pb-4"
+        className="w-full pt-2 pb-4"
       >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
