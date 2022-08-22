@@ -136,9 +136,9 @@ export default function Home() {
     <div>
       <Nav />
       <Balances />
-      <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <h3>Mint</h3>
-        <form onSubmit={submit} className="w-full max-w-sm pt-2 pb-4">
+        <form onSubmit={submit} className="w-full pt-2 pb-4">
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
               <label
