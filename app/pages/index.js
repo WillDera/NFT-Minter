@@ -16,7 +16,7 @@ export default function Home() {
     if (provider) {
       const signer = provider.getSigner();
 
-      const contractAddress = process.env.NEXT_PUBLIC_HEPIER_CONTRACT;
+      const contractAddress = process.env.NEXT_PUBLIC_MAINNET_HEPIER_CONTRACT;
       const contractAbi = abi.abi;
 
       const contract = new ethers.Contract(

@@ -27,12 +27,12 @@ const Nav = () => {
 
         const Id = await provider.getNetwork();
 
-        if (Id.chainId !== 80001) {
-          console.log("connect to mumbai testnet");
-          alert("Connect to mumbai network");
-          throw new error("Connect to mumbai network");
+        if (Id.chainId !== 137) {
+          console.log("connect to polygon mainnet");
+          alert("Connect to polygon mainnet");
+          throw new error("Connect to polygon mainnet");
         }
-        if (Id.chainId === 80001) {
+        if (Id.chainId === 137) {
           value.setCurrentAccount(account);
           value.setIsConnected(true);
         }
@@ -82,7 +82,8 @@ const Nav = () => {
               <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
                 Logged in (
                 <span>
-                  {currentAccount.slice(0, 4)}....{currentAccount.slice(-4)}
+                  {currentAccount.slice(0, 4)}....{currentAccount.slice(-4)}{" "}
+                  <span className="text-sm-end">(mainnet)</span>
                 </span>
                 )
               </button>

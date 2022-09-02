@@ -25,10 +25,10 @@ async function main() {
     export const HepierAddres = "${Hepier.address}"
   `;
 
-  console.log("Saving addresses to cache/deploy.ts");
+  console.log("Saving addresses to cache/mainnet_deploy.ts");
   const data = JSON.stringify(DeploymentInfo);
   fs.writeFileSync(
-    path.resolve(__dirname, "../cache/deploy.ts"),
+    path.resolve(__dirname, "../cache/mainnet_deploy.ts"),
     JSON.parse(data)
   );
 }

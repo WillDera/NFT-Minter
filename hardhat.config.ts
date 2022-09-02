@@ -35,6 +35,11 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    polygon: {
+      url: process.env.POLYGON || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -42,7 +47,7 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      polygonMumbai: "99Y9J9TXGKE9M63MYHJVUKATAJRF6ANEYW",
+      polygon: process.env.POLYGONSCAN_API_KEY || "",
     },
   },
 };

@@ -10,7 +10,7 @@ const Balances = () => {
 
   const getNFTs = async () => {
     const nfts = await alchemy.nft.getNftsForOwner(currentAccount, {
-      contractAddresses: [process.env.NEXT_PUBLIC_HEPIER_CONTRACT],
+      contractAddresses: [process.env.NEXT_PUBLIC_MAINNET_HEPIER_CONTRACT],
     });
 
     const _nftBalances = [];
